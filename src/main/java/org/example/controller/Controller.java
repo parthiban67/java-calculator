@@ -27,31 +27,51 @@ public class Controller {
         this.currentTheme = currentTheme;
     }
 
-    public void emitLabelToDisplay(ActionEvent e){
+    private void appendBuffer(ActionEvent e){
         this.buffer.append(e.getActionCommand());
         this.display.updateLabelValue(buffer.toString());
     }
 
+    private void clearBuffer(ActionEvent e){
+        this.buffer.setLength(0);
+        this.display.updateLabelValue("0");
+    }
+
+    private void lastCharDeleteBuffer(ActionEvent e){
+        if(this.buffer.length() <= 1){
+            this.buffer.setLength(0);
+            this.display.updateLabelValue("0");
+        }else{
+            this.buffer.deleteCharAt(this.buffer.length()-1);
+            this.display.updateLabelValue(buffer.toString());
+        }
+    }
+
+    private void performCalculation(ActionEvent e){
+        this.buffer.setLength(0);
+        this.display.updateLabelValue("0");
+    }
+
     private void setupButtons(){
-        this.addButton("(",0,0,1,1,this::emitLabelToDisplay);
-        this.addButton(")",1,0,1,1,this::emitLabelToDisplay);
-        this.addButton("DEL",2,0,1,1,this::emitLabelToDisplay);
-        this.addButton("CLS",3,0,1,1,this::emitLabelToDisplay);
-        this.addButton("+",0,1,1,1,this::emitLabelToDisplay);
-        this.addButton("7",1,1,1,1,this::emitLabelToDisplay);
-        this.addButton("8",2,1,1,1,this::emitLabelToDisplay);
-        this.addButton("9",3,1,1,1,this::emitLabelToDisplay);
-        this.addButton("-",0,2,1,1,this::emitLabelToDisplay);
-        this.addButton("4",1,2,1,1,this::emitLabelToDisplay);
-        this.addButton("5",2,2,1,1,this::emitLabelToDisplay);
-        this.addButton("6",3,2,1,1,this::emitLabelToDisplay);
-        this.addButton("*",0,3,1,1,this::emitLabelToDisplay);
-        this.addButton("1",1,3,1,1,this::emitLabelToDisplay);
-        this.addButton("2",2,3,1,1,this::emitLabelToDisplay);
-        this.addButton("3",3,3,1,1,this::emitLabelToDisplay);
-        this.addButton("/",0,4,1,1,this::emitLabelToDisplay);
-        this.addButton("0",1,4,1,1,this::emitLabelToDisplay);
-        this.addButton("=",2,4,2,1,this::emitLabelToDisplay);
+        this.addButton("(",0,0,1,1,this::appendBuffer);
+        this.addButton(")",1,0,1,1,this::appendBuffer);
+        this.addButton("DEL",2,0,1,1,this::lastCharDeleteBuffer);
+        this.addButton("CLS",3,0,1,1,this::clearBuffer);
+        this.addButton("+",0,1,1,1,this::appendBuffer);
+        this.addButton("7",1,1,1,1,this::appendBuffer);
+        this.addButton("8",2,1,1,1,this::appendBuffer);
+        this.addButton("9",3,1,1,1,this::appendBuffer);
+        this.addButton("-",0,2,1,1,this::appendBuffer);
+        this.addButton("4",1,2,1,1,this::appendBuffer);
+        this.addButton("5",2,2,1,1,this::appendBuffer);
+        this.addButton("6",3,2,1,1,this::appendBuffer);
+        this.addButton("*",0,3,1,1,this::appendBuffer);
+        this.addButton("1",1,3,1,1,this::appendBuffer);
+        this.addButton("2",2,3,1,1,this::appendBuffer);
+        this.addButton("3",3,3,1,1,this::appendBuffer);
+        this.addButton("/",0,4,1,1,this::appendBuffer);
+        this.addButton("0",1,4,1,1,this::appendBuffer);
+        this.addButton("=",2,4,2,1,this::performCalculation);
     }
 
     private void addButton(final String label, final int x, final int y, final int w, final int h, Consumer<ActionEvent> buttonHandler){
