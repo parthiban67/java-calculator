@@ -20,9 +20,9 @@ public class Application {
 
     private void initFrame(){
         frame = new JFrame("Calculator");
-        frame.setSize(350,500);
+        frame.setSize(360,400);
         frame.setVisible(true);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -36,11 +36,12 @@ public class Application {
     private void initMainPanel(){
         GridBagLayout gridBagLayout = new GridBagLayout();
         JPanel panel = new JPanel(gridBagLayout);
+        panel.setBackground(Color.GRAY);
         Display display = new Display(theme);
         Controller controller = new Controller(display,theme);
         Insets insets = new Insets(0,0,0,0);
-        panel.add(display.getDisplay(),new GridBagConstraints(0,0,1,0,1,1,GridBagConstraints.NORTH,GridBagConstraints.HORIZONTAL,insets,0,0));
-        panel.add(controller.getController(),new GridBagConstraints(0,1,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,insets,0,0));
+        panel.add(display.getDisplay(),new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.NORTH,GridBagConstraints.HORIZONTAL,insets,0,0));
+        panel.add(controller.getController(),new GridBagConstraints(0,1,1,1,1,10,GridBagConstraints.CENTER,GridBagConstraints.BOTH,insets,0,0));
         frame.add(panel);
     }
 
