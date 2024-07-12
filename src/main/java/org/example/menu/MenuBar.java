@@ -51,7 +51,7 @@ public class MenuBar {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                JOptionPane.showMessageDialog(menuBar.getParent(),"h");
+                JOptionPane.showMessageDialog(menuBar.getParent(),"Simple Calculator rewritten in swing after 7 years");
             }
         });
     }
