@@ -15,6 +15,7 @@ public class Controller {
     private Theme currentTheme;
     private final JPanel panel;
     private final StringBuilder buffer;
+    private static final int MAX_BUFFER_SIZE = 25;
     private final Evaluator evaluator;
 
     public Controller(Display display, Theme currentTheme, Evaluator evaluator) {
@@ -31,6 +32,9 @@ public class Controller {
     }
 
     private void appendBuffer(ActionEvent e){
+        if(this.buffer.length() > MAX_BUFFER_SIZE){
+            return;
+        }
         this.buffer.append(e.getActionCommand());
         this.display.updateLabelValue(buffer.toString());
     }
