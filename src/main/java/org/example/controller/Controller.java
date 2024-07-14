@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.themes.Theme;
+import org.example.util.Evaluator;
 import org.example.view.Display;
 
 import javax.swing.*;
@@ -14,10 +15,12 @@ public class Controller {
     private Theme currentTheme;
     private final JPanel panel;
     private final StringBuilder buffer;
+    private final Evaluator evaluator;
 
-    public Controller(Display display, Theme currentTheme) {
+    public Controller(Display display, Theme currentTheme, Evaluator evaluator) {
         this.display = display;
         this.currentTheme = currentTheme;
+        this.evaluator = evaluator;
         this.panel = new JPanel(new GridBagLayout());
         this.buffer = new StringBuilder();
         this.setupButtons();
@@ -48,8 +51,10 @@ public class Controller {
     }
 
     private void performCalculation(ActionEvent e){
-        this.buffer.setLength(0);
-        this.display.updateLabelValue("0");
+        if(!this.buffer.isEmpty()){
+            this.display.updateLabelValue(evaluator.evaluate(this.buffer.toString()));
+            this.buffer.setLength(0);
+        }
     }
 
     private void setupButtons(){

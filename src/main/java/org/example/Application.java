@@ -4,6 +4,7 @@ import org.example.controller.Controller;
 import org.example.menu.MenuBar;
 import org.example.themes.Theme;
 import org.example.themes.ThemeFactory;
+import org.example.util.Evaluator;
 import org.example.view.Display;
 
 import javax.swing.*;
@@ -38,7 +39,8 @@ public class Application {
         JPanel panel = new JPanel(gridBagLayout);
         panel.setBackground(Color.GRAY);
         Display display = new Display(theme);
-        Controller controller = new Controller(display,theme);
+        Evaluator evaluator = new Evaluator();
+        Controller controller = new Controller(display,theme,evaluator);
         Insets insets = new Insets(0,0,0,0);
         panel.add(display.getDisplay(),new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.NORTH,GridBagConstraints.HORIZONTAL,insets,0,0));
         panel.add(controller.getController(),new GridBagConstraints(0,1,1,1,1,10,GridBagConstraints.CENTER,GridBagConstraints.BOTH,insets,0,0));
